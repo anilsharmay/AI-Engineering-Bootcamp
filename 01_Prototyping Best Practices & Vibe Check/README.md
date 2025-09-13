@@ -3,25 +3,8 @@
      height="auto"/>
 </p>
 
-<h1 align="center" id="heading">Session 1: Introduction and Vibe Check</h1>
+<h1 align="center" id="heading">Assignment 1: Vibe Checking</h1>
 
-### [Quicklinks](https://github.com/AI-Maker-Space/AIE8/tree/main/00_AIM_Quicklinks)
-
-| 📰 Session Sheet | ⏺️ Recording     | 🖼️ Slides        | 👨‍💻 Repo         | 📝 Homework      | 📁 Feedback       |
-|:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|
-| [Session 1: Introduction and Vibe Check](https://www.notion.so/Session-1-Introduction-and-Vibe-Check-263cd547af3d81869041ccc46523f1ec) |[Recording!](https://us02web.zoom.us/rec/share/AZEoQtJn03hZUBXoaAUT9I1Nx7sSdsjZ4n5ll8TTfCGQsVrBi709FLQLXwwdCCxD.2YqwpkoZhDDnHVKK) (Y&W@%PS3) | [Session 1 Slides](https://www.canva.com/design/DAGya0dMFhM/I4kYi9Y-Ec_jMtoq0aq4-g/edit?utm_content=DAGya0dMFhM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) | You are here! | [Session 1 Assignment: Vibe Check](https://forms.gle/jNhHxcmCoMJiqpUL6) | [AIE8 Feedback 9/9](https://forms.gle/GgFqgEkYPQ5a3yHj7)
-
-## 🏗️ How AIM Does Assignments
-
-> 📅 **Assignments will always be released to students as live class begins.** We will never release assignments early.
-
-Each assignment will have a few of the following categories of exercises:
-
-- ❓ **Questions** – these will be questions that you will be expected to gather the answer to! These can appear as general questions, or questions meant to spark a discussion in your breakout rooms!
-
-- 🏗️ **Activities** – these will be work or coding activities meant to reinforce specific concepts or theory components.
-
-- 🚧 **Advanced Builds (optional)** – Take on a challenge! These builds require you to create something with minimal guidance outside of the documentation. Completing an Advanced Build earns full credit in place of doing the base assignment notebook questions/activities.
 
 ### Main Assignment
 
@@ -37,15 +20,77 @@ You will be required to submit a link to your GitHub, as well as screenshots of 
 Please evaluate your system on the following questions:
 
 1. Explain the concept of object-oriented programming in simple terms to a complete beginner. 
-    - Aspect Tested:
-2. Read the following paragraph and provide a concise summary of the key points…
-    - Aspect Tested:
+    
+    <p align = "center" draggable=”false” ><img src="screenshots/1_Knowledge.png" 
+     width="400px"
+     height="auto"/>
+    </p>
+
+    - Aspect Tested: 
+        - Accuracy 
+    - Obervations:
+        - The responses answered the question accurately using appropriate analogies 
+        - The text formatting seems to be broken e.g., markdown formatting
+
+2. Read the following paragraph and provide a concise summary of the key points.
+Copied text from the Engadget article about all announcements made at the recent Apple event - [Link](https://www.engadget.com/mobile/smartphones/everything-apple-revealed-at-the-iphone-17-launch-event-iphone-air-iphone-17-pro-airpods-pro-3-and-more-171028663.html)
+
+    <p align = "center" draggable=”false” ><img src="screenshots/2_Summarizing.gif" 
+     width="400px"
+     height="auto"/>
+    </p> 
+
+    - Aspect Tested: 
+        - Accuracy
+        - If all main details and products are captured
+    - Observations:
+        - All essential details captured
+        - (Surprised!) The MS DOS theme is maintained in the formatting of the response
 3. Write a short, imaginative story (100–150 words) about a robot finding friendship in an unexpected place.
+
+    <p align = "center" draggable=”false” ><img src="screenshots/3_Creative Generation.png" 
+     width="400px"
+     height="auto"/>
+    </p>
+
     - Aspect Tested:
+        - Task completion
+        - Creativity
+    - Observations:
+        - Tasks are being completed
+        - Acceptable stories
+        - The DOS theme is being applied to the response format sporadically.
 4. If a store sells apples in packs of 4 and oranges in packs of 3, how many packs of each do I need to buy to get exactly 12 apples and 9 oranges?
+
+    <p align = "center" draggable=”false” ><img src="screenshots/4_Logic.png" 
+     width="400px"
+     height="auto"/>
+    </p>
+
     - Aspect Tested:
-5. Rewrite the following paragraph in a professional, formal tone…
+        - Logic and Reasoning abilities
+    - Observations:
+        - The step  by step reasoning logic is accurate
+        - The final answer is accurate
+        - Same formatting issues with markup
+
+5. Rewrite the following paragraph in a professional, formal tone: 
+
+Picked up text from a Reddit post about Pixel 10 to be re-written in formal tone - [LINK](https://www.reddit.com/r/GooglePixel/comments/1mw2i0i/pixel_10_seems_to_be_the_right_direction_dont/).
+
+<p align = "center" draggable=”false” ><img src="screenshots/5_Rewrite.gif" 
+        width="400px"
+        height="auto"/>
+    </p>
+
     - Aspect Tested:
+        - Task completion
+        - Accuracy
+        - Refining the output
+    - Observations:
+        - The rewriting task was completed with acceptable quality
+        - The app doesnt seem to have "memory" to improve on previously generated output
+        - The output lost the "first person" tone that was part of the input text
 
 This "vibe check" now serves as a baseline, of sorts, to help understand what holes your application has.
 
@@ -59,6 +104,12 @@ This "vibe check" now serves as a baseline, of sorts, to help understand what ho
 
 What are some limitations of vibe checking as an evaluation tool?
 ##### ✅ Answer:
+- Subjective: There aren't any formal requirements, criteria, or constraints. What is acceptable for one might not be true for others. Leaves room for personal interpretation and biases. 
+- The final "judgement" is not transparent and cannot be explained to others.
+- Does not quantify any metrics around accuracy or performance,
+- Prone to weigh aesthetics and presentation more over actual performance. e.g., in the group exercise about explaining OOP concepts, the formatting errors impacted judgement of the app, ignoring the fact that the content was accurate and on point. 
+- Hard to establish quality or reproduce the testing without manual, human intervention, as they involve personal "intuition".
+- No way to compare different implementations as there are no comparative metrics. 
 
 ### 🚧 Advanced Build (OPTIONAL):
 
