@@ -8,12 +8,13 @@
 
 ### Main Assignment
 
-In the following assignment, you are required to take the app that you created for the AIE8 challenge (from [this repository](https://github.com/AI-Maker-Space/The-AI-Engineer-Challenge)) and conduct what is known, colloquially, as a "vibe check" on the application. 
+This assignment will "vibe check" my AI chatbot app - DOSGPT - [GitHub Repo](https://github.com/anilsharmay/AI-Engineer-Challenge)
 
-You will be required to submit a link to your GitHub, as well as screenshots of the completed "vibe checks" through the provided Google Form!
+#### A Note on Vibe Checking
 
-> NOTE: This will require you to make updates to your personal class repository, instructions on that process can be found [here](https://github.com/AI-Maker-Space/AIE8/tree/main/00_Setting%20Up%20Git)!
-
+>"Vibe checking" is an informal term for cursory unstructured and non-comprehensive evaluation of LLM-powered systems. The idea is to loosely evaluate our system to cover significant and crucial functions where failure would be immediately noticeable and severe.
+>
+>In essence, it's a first look to ensure your system isn't experiencing catastrophic failure.
 
 #### 🏗️ Activity #1:
 
@@ -22,7 +23,7 @@ Please evaluate your system on the following questions:
 1. Explain the concept of object-oriented programming in simple terms to a complete beginner. 
     
     <p align = "center" draggable=”false” ><img src="screenshots/1_Knowledge.png" 
-     width="400px"
+     width="800px"
      height="auto"/>
     </p>
 
@@ -36,7 +37,7 @@ Please evaluate your system on the following questions:
 Copied text from the Engadget article about all announcements made at the recent Apple event - [Link](https://www.engadget.com/mobile/smartphones/everything-apple-revealed-at-the-iphone-17-launch-event-iphone-air-iphone-17-pro-airpods-pro-3-and-more-171028663.html)
 
     <p align = "center" draggable=”false” ><img src="screenshots/2_Summarizing.gif" 
-     width="400px"
+     width="800px"
      height="auto"/>
     </p> 
 
@@ -49,7 +50,7 @@ Copied text from the Engadget article about all announcements made at the recent
 3. Write a short, imaginative story (100–150 words) about a robot finding friendship in an unexpected place.
 
     <p align = "center" draggable=”false” ><img src="screenshots/3_Creative Generation.png" 
-     width="400px"
+     width="800px"
      height="auto"/>
     </p>
 
@@ -63,7 +64,7 @@ Copied text from the Engadget article about all announcements made at the recent
 4. If a store sells apples in packs of 4 and oranges in packs of 3, how many packs of each do I need to buy to get exactly 12 apples and 9 oranges?
 
     <p align = "center" draggable=”false” ><img src="screenshots/4_Logic.png" 
-     width="400px"
+     width="800px"
      height="auto"/>
     </p>
 
@@ -79,7 +80,7 @@ Copied text from the Engadget article about all announcements made at the recent
 Picked up text from a Reddit post about Pixel 10 to be re-written in formal tone - [LINK](https://www.reddit.com/r/GooglePixel/comments/1mw2i0i/pixel_10_seems_to_be_the_right_direction_dont/).
 
 <p align = "center" draggable=”false” ><img src="screenshots/5_Rewrite.gif" 
-        width="400px"
+        width="800px"
         height="auto"/>
     </p>
 
@@ -94,11 +95,7 @@ Picked up text from a Reddit post about Pixel 10 to be re-written in formal tone
 
 This "vibe check" now serves as a baseline, of sorts, to help understand what holes your application has.
 
-#### A Note on Vibe Checking
 
->"Vibe checking" is an informal term for cursory unstructured and non-comprehensive evaluation of LLM-powered systems. The idea is to loosely evaluate our system to cover significant and crucial functions where failure would be immediately noticeable and severe.
->
->In essence, it's a first look to ensure your system isn't experiencing catastrophic failure.
 
 #### ❓Question #1:
 
