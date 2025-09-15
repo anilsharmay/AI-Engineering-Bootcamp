@@ -8,11 +8,12 @@ dependencies = [
     "ipykernel>=6.29.5",
     "jupyter>=1.1.1",
     "matplotlib>=3.10.0",
-    "nump>=5.5.5.5",
+    "numpy>=1.24.0",
     "openai>=1.59.7",
     "pandas>=2.2.3",
     "plotly>=5.24.1",
     "python-dotenv>=1.0.1",
     "scikit-learn>=1.6.1",
     "scipy>=1.15.1",
+    "youtube-transcript-api>=0.6.0",
 ]
