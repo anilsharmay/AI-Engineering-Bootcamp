@@ -11,8 +11,11 @@ graph TB
     
     %% Text Processing
     TRANSCRIPT["📄 Raw Transcript<br/>• Full text content<br/>• Segment metadata<br/>• Video metadata"]
+    DOC_METADATA["📋 Document with Metadata<br/>• get_document_with_metadata()<br/>• Combined text + metadata<br/>• Ready for chunking"]
     SPLITTER["✂️ CharacterTextSplitter<br/>• Chunk size: 500<br/>• Overlap: 100<br/>• Preserve context"]
-    CHUNKS["📦 Text Chunks<br/>• Multiple segments<br/>• Metadata preserved<br/>• Ready for embedding"]
+    CHUNKS["📦 Text Chunks<br/>• Multiple segments<br/>• Basic chunks only<br/>• No metadata yet"]
+    CHUNK_METADATA["🏷️ Chunk Metadata Creation<br/>• Inherit parent metadata<br/>• Add chunk_id, chunk_length<br/>• Create chunks_with_metadata"]
+    CHUNKS_WITH_META["📦 Chunks with Metadata<br/>• Text + metadata combined<br/>• Ready for embedding<br/>• Full context preserved"]
     
     %% Vector Database
     EMBEDDING["🧠 EmbeddingModel<br/>• OpenAI text-embedding-3-small<br/>• Async processing<br/>• Vector generation"]
@@ -39,10 +42,13 @@ graph TB
     YT_API --> TRANSCRIPT
     YT_API --> ERROR_HANDLING
     
-    TRANSCRIPT --> SPLITTER
+    TRANSCRIPT --> DOC_METADATA
+    DOC_METADATA --> SPLITTER
     SPLITTER --> CHUNKS
+    CHUNKS --> CHUNK_METADATA
+    CHUNK_METADATA --> CHUNKS_WITH_META
     
-    CHUNKS --> EMBEDDING
+    CHUNKS_WITH_META --> EMBEDDING
     EMBEDDING --> VECTOR_DB
     
     USER_QUERY --> RETRIEVAL
@@ -61,8 +67,8 @@ graph TB
     classDef errorClass fill:#ffebee,stroke:#c62828,stroke-width:2px
     
     class YT_URL,USER_QUERY inputClass
-    class YT_LOADER,YT_API,SPLITTER,EMBEDDING,RETRIEVAL,PROMPTS,LLM processClass
-    class TRANSCRIPT,CHUNKS,VECTOR_DB,CONTEXT storageClass
+    class YT_LOADER,YT_API,SPLITTER,CHUNK_METADATA,EMBEDDING,RETRIEVAL,PROMPTS,LLM processClass
+    class TRANSCRIPT,DOC_METADATA,CHUNKS,CHUNKS_WITH_META,VECTOR_DB,CONTEXT storageClass
     class RESPONSE outputClass
     class ERROR_HANDLING errorClass
 ```
@@ -96,10 +102,12 @@ graph TB
 
 1. **Input**: YouTube URL → Video ID extraction
 2. **Ingestion**: Transcript API → Raw transcript text
-3. **Processing**: Text splitting → Chunked segments
-4. **Embedding**: Text chunks → Vector embeddings
-5. **Storage**: Vectors + metadata → Vector database
-6. **Query**: User question → Similarity search
-7. **Retrieval**: Relevant chunks + metadata → Context
-8. **Generation**: Context + prompts → LLM response
-9. **Output**: Formatted response with video context
+3. **Document Preparation**: Raw transcript → Document with metadata
+4. **Text Processing**: Document → Text splitting → Basic chunks
+5. **Metadata Creation**: Basic chunks → Chunks with metadata
+6. **Embedding**: Chunks with metadata → Vector embeddings
+7. **Storage**: Vectors + metadata → Vector database
+8. **Query**: User question → Similarity search
+9. **Retrieval**: Relevant chunks + metadata → Context
+10. **Generation**: Context + prompts → LLM response
+11. **Output**: Formatted response with video context
