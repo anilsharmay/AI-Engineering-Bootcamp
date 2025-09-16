@@ -23,7 +23,7 @@ graph TB
     
     %% RAG Pipeline
     USER_QUERY["❓ User Query<br/>• Natural language question<br/>• About video content"]
-    RETRIEVAL["🔍 Similarity Search<br/>• k=3 most relevant chunks<br/>• Include metadata<br/>• Similarity scores"]
+    RETRIEVAL["🔍 Similarity Search<br/>• search_by_text(query, k=3, include_metadata=True)<br/>• Most relevant chunks<br/>• Similarity scores"]
     CONTEXT["📋 Retrieved Context<br/>• Relevant chunks<br/>• Video metadata<br/>• Similarity scores"]
     
     %% LLM Processing
@@ -87,7 +87,7 @@ graph TB
 ### 3. **Vector Database**
 - **EmbeddingModel**: Converts text chunks to vector embeddings
 - **VectorDatabase**: Stores vectors with associated metadata
-- **Similarity Search**: Retrieves most relevant chunks for queries
+- **Similarity Search**: Uses `search_by_text(query, k=3, include_metadata=True)` to retrieve most relevant chunks
 
 ### 4. **RAG Pipeline**
 - **YouTubeRAGPipeline**: Specialized pipeline for YouTube content
@@ -107,7 +107,7 @@ graph TB
 5. **Metadata Creation**: Basic chunks → Chunks with metadata
 6. **Embedding**: Chunks with metadata → Vector embeddings
 7. **Storage**: Vectors + metadata → Vector database
-8. **Query**: User question → Similarity search
+8. **Query**: User question → search_by_text(query, k=3, include_metadata=True)
 9. **Retrieval**: Relevant chunks + metadata → Context
 10. **Generation**: Context + prompts → LLM response
 11. **Output**: Formatted response with video context
