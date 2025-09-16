@@ -47,7 +47,14 @@ class VectorDatabase:
     ) -> List[Tuple[str, float, Optional[Dict]]]:
         query_vector = self.embedding_model.get_embedding(query_text)
         results = self.search(query_vector, k, distance_measure, include_metadata)
-        return [result[0] for result in results] if return_as_text else results
+        
+        if return_as_text:
+            return [result[0] for result in results]
+        elif include_metadata:
+            return results  # Return (text, score, metadata)
+        else:
+            # For backward compatibility, return (text, score) when include_metadata=False
+            return [(result[0], result[1]) for result in results]
 
     def retrieve_from_key(self, key: str) -> np.array:
         return self.vectors.get(key, None)
