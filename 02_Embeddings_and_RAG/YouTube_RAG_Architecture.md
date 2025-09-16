@@ -11,7 +11,7 @@ graph TB
     
     %% Text Processing
     TRANSCRIPT["📄 Raw Transcript<br/>• Full text content<br/>• Segment metadata<br/>• Video metadata"]
-    SPLITTER["✂️ CharacterTextSplitter<br/>• Chunk size: 1000<br/>• Overlap: 200<br/>• Preserve context"]
+    SPLITTER["✂️ CharacterTextSplitter<br/>• Chunk size: 500<br/>• Overlap: 100<br/>• Preserve context"]
     CHUNKS["📦 Text Chunks<br/>• Multiple segments<br/>• Metadata preserved<br/>• Ready for embedding"]
     
     %% Vector Database
@@ -20,7 +20,7 @@ graph TB
     
     %% RAG Pipeline
     USER_QUERY["❓ User Query<br/>• Natural language question<br/>• About video content"]
-    RETRIEVAL["🔍 Similarity Search<br/>• k=4 most relevant chunks<br/>• Include metadata<br/>• Similarity scores"]
+    RETRIEVAL["🔍 Similarity Search<br/>• k=3 most relevant chunks<br/>• Include metadata<br/>• Similarity scores"]
     CONTEXT["📋 Retrieved Context<br/>• Relevant chunks<br/>• Video metadata<br/>• Similarity scores"]
     
     %% LLM Processing
