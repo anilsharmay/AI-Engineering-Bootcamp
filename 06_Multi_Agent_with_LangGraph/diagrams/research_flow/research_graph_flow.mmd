@@ -1,0 +1,32 @@
+flowchart TB
+    START([START]) --> ResearchSupervisor[📋 Research Supervisor<br/>Entry Point<br/>📊 Reads: messages, team_members<br/>📝 Writes: next, messages]
+    
+    ResearchSupervisor --> Decision{Decision Point:<br/>Which agent next?}
+    
+    Decision --> LeftSpacer(( ))
+    Decision --> RightSpacer(( ))
+    LeftSpacer -->|"Search"| SearchAgent[🔎 Search Agent<br/>Tavily Web Search<br/>📊 Reads: messages<br/>📝 Writes: messages]
+    RightSpacer -->|"HowPeopleUseAIRetriever"| RAGAgent[📚 RAG Agent<br/>Document Retrieval<br/>📊 Reads: messages<br/>📝 Writes: messages]
+    Decision -->|"FINISH"| END([END])
+    
+    SearchAgent --> ResearchSupervisor
+    RAGAgent --> ResearchSupervisor
+    
+    %% Tool connections
+    SearchAgent -.->|Uses| TavilyTool[🌐 Tavily Search Tool]
+    RAGAgent -.->|Uses| RAGTool[📄 RAG Retrieval Tool]
+    
+    %% Invisible spacers styling
+    classDef spacer fill:#0000,stroke:#0000
+    
+    %% Styling
+    classDef supervisor fill:#e1f5fe,stroke:#01579b,stroke-width:3px
+    classDef agent fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef tool fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    classDef decision fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    
+    class ResearchSupervisor supervisor
+    class SearchAgent,RAGAgent agent
+    class TavilyTool,RAGTool tool
+    class Decision decision
+    class LeftSpacer,RightSpacer spacer

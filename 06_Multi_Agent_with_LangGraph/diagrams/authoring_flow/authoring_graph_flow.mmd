@@ -1,0 +1,36 @@
+flowchart TB
+    START([START]) --> AuthoringSupervisor[📝 Authoring Supervisor<br/>Entry Point<br/>📊 Reads: messages, team_members, current_files<br/>📝 Writes: next, messages]
+    
+    AuthoringSupervisor --> Decision{Decision Point:<br/>Which agent next?}
+    
+    Decision --> LeftSpacer(( ))
+    Decision --> RightSpacer(( ))
+    Decision --> CenterSpacer(( ))
+    
+    LeftSpacer -->|"DocWriter"| DocWriter[📄 DocWriter<br/>Creates content<br/>📊 Reads: messages, current_files<br/>📝 Writes: messages]
+    RightSpacer -->|"NoteTaker"| NoteTaker[📝 NoteTaker<br/>Research & outlines<br/>📊 Reads: messages, current_files<br/>📝 Writes: messages]
+    CenterSpacer -->|"CopyEditor"| CopyEditor[✏️ CopyEditor<br/>Grammar & style<br/>📊 Reads: messages, current_files<br/>📝 Writes: messages]
+    
+    Decision -->|"FINISH"| END([END])
+    
+    DocWriter --> AuthoringSupervisor
+    NoteTaker --> AuthoringSupervisor
+    CopyEditor --> AuthoringSupervisor
+    
+    %% Tool connections
+    DocWriter -.->|Uses| FileTools[📁 File Tools<br/>write_document, edit_document, read_document]
+    NoteTaker -.->|Uses| ResearchTools[🔍 Research Tools<br/>create_outline, read_document, reference_previous_responses]
+    CopyEditor -.->|Uses| EditTools[✏️ Edit Tools<br/>write_document, edit_document, read_document]
+    
+    %% Styling
+    classDef supervisor fill:#e1f5fe,stroke:#01579b,stroke-width:3px
+    classDef agent fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef tool fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    classDef decision fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef spacer fill:#0000,stroke:#0000
+    
+    class AuthoringSupervisor supervisor
+    class DocWriter,NoteTaker,CopyEditor agent
+    class FileTools,ResearchTools,EditTools tool
+    class Decision decision
+    class LeftSpacer,RightSpacer,CenterSpacer spacer
