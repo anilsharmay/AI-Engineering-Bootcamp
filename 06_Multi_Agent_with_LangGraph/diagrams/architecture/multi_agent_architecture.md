@@ -9,7 +9,7 @@ flowchart TD
     %% Meta-Supervisor Level
     MetaSupervisor[🎯 Meta-Supervisor<br/>Routes between teams]
     
-    %% Research Team Subgraph
+    %% Research Team Subgraph (First step in workflow)
     subgraph ResearchTeam["🔍 Research Team"]
         ResearchSupervisor[📋 Research Supervisor<br/>Manages research workflow]
         SearchAgent[🔎 Search Agent<br/>Tavily web search]
@@ -21,7 +21,7 @@ flowchart TD
         RAGAgent --> ResearchSupervisor
     end
     
-    %% Authoring Team Subgraph  
+    %% Authoring Team Subgraph (Second step in workflow)
     subgraph AuthoringTeam["✍️ Authoring Team"]
         AuthoringSupervisor[📝 Authoring Supervisor<br/>Manages writing workflow]
         DocWriter[📄 DocWriter<br/>Creates content]
@@ -44,7 +44,7 @@ flowchart TD
     end
     
     %% Tools & File System
-    subgraph Tools["🛠️ Shared Tools"]
+    subgraph Tools["🛠️ Authoring Team Tools"]
         FileSystem[📁 File System<br/>create_outline, write_document<br/>edit_document, read_document]
         ReferenceTool[🔍 Reference Tool<br/>reference_previous_responses]
     end
@@ -57,7 +57,6 @@ flowchart TD
     SearchAgent -.-> TavilyAPI
     RAGAgent -.-> PDFDocs
     RAGAgent -.-> QdrantDB
-    ResearchTeam -.-> Tools
     
     %% Authoring Team Connections  
     AuthoringTeam -.-> Tools
@@ -96,12 +95,12 @@ flowchart TD
 - **Qdrant Vector DB**: Previous cohort responses
 - **PDF Documents**: "How people use AI" dataset
 
-### 🛠️ Shared Tools
-- **File System**: Document creation, editing, reading tools
-- **Reference Tool**: Access to previous responses
+### 🛠️ Authoring Team Tools
+- **File System**: Document creation, editing, reading tools (Authoring Team only)
+- **Reference Tool**: Access to previous responses (Authoring Team only)
 
 ## Flow Characteristics
 - **Hierarchical**: Meta-supervisor → Team supervisors → Individual agents
 - **Bidirectional**: Agents report back to their supervisors
-- **Tool Integration**: Agents use shared tools and data sources
+- **Tool Integration**: Research Team uses web search and RAG; Authoring Team uses file system and reference tools
 - **Color-coded**: Different node types have distinct styling

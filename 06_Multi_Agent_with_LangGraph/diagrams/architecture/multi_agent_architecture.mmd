@@ -2,7 +2,7 @@ flowchart TD
     %% Meta-Supervisor Level
     MetaSupervisor[🎯 Meta-Supervisor<br/>Routes between teams]
     
-    %% Research Team Subgraph
+    %% Research Team Subgraph (First step in workflow)
     subgraph ResearchTeam["🔍 Research Team"]
         ResearchSupervisor[📋 Research Supervisor<br/>Manages research workflow]
         SearchAgent[🔎 Search Agent<br/>Tavily web search]
@@ -14,7 +14,7 @@ flowchart TD
         RAGAgent --> ResearchSupervisor
     end
     
-    %% Authoring Team Subgraph  
+    %% Authoring Team Subgraph (Second step in workflow)
     subgraph AuthoringTeam["✍️ Authoring Team"]
         AuthoringSupervisor[📝 Authoring Supervisor<br/>Manages writing workflow]
         DocWriter[📄 DocWriter<br/>Creates content]
@@ -37,7 +37,7 @@ flowchart TD
     end
     
     %% Tools & File System
-    subgraph Tools["🛠️ Shared Tools"]
+    subgraph Tools["🛠️ Authoring Team Tools"]
         FileSystem[📁 File System<br/>create_outline, write_document<br/>edit_document, read_document]
         ReferenceTool[🔍 Reference Tool<br/>reference_previous_responses]
     end
@@ -50,7 +50,6 @@ flowchart TD
     SearchAgent -.-> TavilyAPI
     RAGAgent -.-> PDFDocs
     RAGAgent -.-> QdrantDB
-    ResearchTeam -.-> Tools
     
     %% Authoring Team Connections  
     AuthoringTeam -.-> Tools
