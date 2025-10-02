@@ -15,4 +15,9 @@ dependencies = [
     "unstructured>=0.14.8",
     "nltk==3.8.1",
     "pymupdf>=1.26.3",
+    "networkx>=3.5",
+    "matplotlib>=3.10.6",
+    "plotly>=6.3.1",
+    "pandas>=2.3.1",
+    "seaborn>=0.13.2",
 ]
