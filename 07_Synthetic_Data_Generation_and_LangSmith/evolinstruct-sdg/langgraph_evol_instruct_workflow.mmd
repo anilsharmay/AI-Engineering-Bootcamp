@@ -1,0 +1,35 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	analyze_documents(analyze_documents)
+	generate_base_questions(generate_base_questions)
+	simple_evolution(simple_evolution)
+	multi_context_evolution(multi_context_evolution)
+	reasoning_evolution(reasoning_evolution)
+	generate_answers(generate_answers)
+	retrieve_contexts(retrieve_contexts)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> analyze_documents;
+	analyze_documents --> generate_base_questions;
+	generate_answers --> retrieve_contexts;
+	generate_base_questions --> simple_evolution;
+	multi_context_evolution -.-> generate_answers;
+	multi_context_evolution -.-> reasoning_evolution;
+	multi_context_evolution -.-> simple_evolution;
+	reasoning_evolution -.-> generate_answers;
+	reasoning_evolution -.-> multi_context_evolution;
+	reasoning_evolution -.-> simple_evolution;
+	simple_evolution -.-> generate_answers;
+	simple_evolution -.-> multi_context_evolution;
+	simple_evolution -.-> reasoning_evolution;
+	retrieve_contexts --> __end__;
+	multi_context_evolution -.-> multi_context_evolution;
+	reasoning_evolution -.-> reasoning_evolution;
+	simple_evolution -.-> simple_evolution;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc
