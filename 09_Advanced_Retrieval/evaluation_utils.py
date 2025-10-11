@@ -7,6 +7,7 @@ Provides reusable evaluation logic with automatic LangSmith cost tracking.
 import time
 import os
 import pickle
+import uuid
 from typing import Dict, Any, List
 from langsmith import Client
 from ragas import evaluate
@@ -57,42 +58,36 @@ def calculate_cost_from_run(run) -> float:
     return total_cost
 
 
-def get_evaluation_cost(start_time: float, end_time: float, project_name: str, wait_time: int = 5) -> float:
+def get_evaluation_cost(eval_tag: str, project_name: str, wait_time: int = 10) -> float:
     """
-    Get total cost for all LangSmith runs in a time window.
+    Get total cost for all LangSmith runs with a specific tag.
     
     Args:
-        start_time: Unix timestamp of evaluation start
-        end_time: Unix timestamp of evaluation end
+        eval_tag: Unique tag for this evaluation (e.g., "Naive_Standard")
         project_name: LangSmith project name
-        wait_time: Seconds to wait for trace upload
+        wait_time: Seconds to wait for trace upload (default 10 for safety)
         
     Returns:
-        Total cost in USD for all runs in the time window
+        Total cost in USD for all runs with this tag
     """
     time.sleep(wait_time)  # Wait for traces to upload
     
     client = Client()
     
     try:
-        from datetime import datetime
-        
-        # Convert unix timestamps to datetime
-        start_dt = datetime.fromtimestamp(start_time)
-        end_dt = datetime.fromtimestamp(end_time)
-        
-        # Get all runs in the time window
+        # Query runs by tag (much more precise than time window)
         runs = client.list_runs(
             project_name=project_name,
-            start_time=start_dt,
-            end_time=end_dt
+            filter=f'has(tags, "{eval_tag}")'
         )
         
-        # Sum costs from all runs
+        # Sum costs only from root-level runs (avoid double-counting children)
+        # Parent run costs already include their children
         total_cost = 0.0
         run_count = 0
         for run in runs:
-            if run.total_cost is not None:
+            # Only count top-level runs (no parent_run_id)
+            if run.parent_run_id is None and run.total_cost is not None:
                 # Convert to float (LangSmith returns Decimal)
                 total_cost += float(run.total_cost)
                 run_count += 1
@@ -114,7 +109,8 @@ def evaluate_retriever_config(
     project_name: str = "Advanced-Retrieval-Evaluation",
     auto_cost: bool = True,
     use_cache: bool = True,
-    force_recompute: bool = False
+    force_recompute: bool = False,
+    rate_limit_delay: float = 0
 ) -> Dict[str, Any]:
     """
     Evaluate a single retriever configuration with automatic cost tracking and caching.
@@ -130,6 +126,7 @@ def evaluate_retriever_config(
         auto_cost: If True, automatically fetch cost from LangSmith
         use_cache: If True, use cached results if available
         force_recompute: If True, bypass cache and re-run evaluation
+        rate_limit_delay: Seconds to wait between each retrieval (for rate limiting, excluded from latency)
         
     Returns:
         Dict with metrics: precision, recall, entity_recall, latency, cost
@@ -157,6 +154,7 @@ def evaluate_retriever_config(
     # Ragas 0.2.10 uses 'user_input' for questions, 'reference' for ground truth
     retrieved_contexts = []
     start_time = time.time()
+    total_delay = 0  # Track artificial delays for rate limiting
     
     question_col = 'user_input' if 'user_input' in golden_dataset.columns else 'question'
     ground_truth_col = 'reference' if 'reference' in golden_dataset.columns else 'ground_truth'
@@ -165,8 +163,14 @@ def evaluate_retriever_config(
         docs = retriever.invoke(question)
         contexts = [doc.page_content for doc in docs]
         retrieved_contexts.append(contexts)
+        
+        # Apply rate limit delay if specified (excluded from latency metric)
+        if rate_limit_delay > 0:
+            time.sleep(rate_limit_delay)
+            total_delay += rate_limit_delay
     
-    total_latency = time.time() - start_time
+    # Calculate actual latency (excluding artificial delays)
+    total_latency = (time.time() - start_time) - total_delay
     
     # Prepare evaluation dataset
     # Convert to list of samples (ragas 0.2.10 format)
@@ -184,7 +188,7 @@ def evaluate_retriever_config(
     
     eval_dataset = EvaluationDataset.from_dict(samples)
     
-    # Run Ragas evaluation
+    # Run Ragas evaluation with tagged callbacks for cost tracking
     # Pass llm and embeddings if provided, otherwise ragas will use defaults
     eval_params = {
         'dataset': eval_dataset,
@@ -196,13 +200,21 @@ def evaluate_retriever_config(
     if embeddings is not None:
         eval_params['embeddings'] = embeddings
     
-    # Record evaluation start time for cost tracking
-    eval_start_time = time.time()
+    # Add LangSmith callback with unique tags for this evaluation
+    # Include session ID to avoid counting runs from previous attempts
+    from langchain.callbacks import LangChainTracer
+    session_id = str(uuid.uuid4())[:8]  # Short unique ID for this run
+    eval_tag = f"{retriever_name}_{chunking_type}_{session_id}"
     
+    if auto_cost:
+        tracer = LangChainTracer(
+            project_name=project_name,
+            tags=[eval_tag, "retriever_eval", f"{retriever_name}_{chunking_type}"]
+        )
+        eval_params['callbacks'] = [tracer]
+    
+    # Run evaluation
     result = evaluate(**eval_params)
-    
-    # Record evaluation end time
-    eval_end_time = time.time()
     
     # Extract metric values from EvaluationResult
     # Convert to dict or access as DataFrame
@@ -217,10 +229,10 @@ def evaluate_retriever_config(
         recall = getattr(result, 'context_recall', 0.0)
         entity_recall = getattr(result, 'context_entity_recall', 0.0)
     
-    # Get cost from LangSmith if enabled
+    # Get cost from LangSmith if enabled (using tags for precise matching)
     cost = 0.0
     if auto_cost:
-        cost = get_evaluation_cost(eval_start_time, eval_end_time, project_name)
+        cost = get_evaluation_cost(eval_tag, project_name)
     
     # Display results
     print(f"\n{retriever_name} ({chunking_type}):")
