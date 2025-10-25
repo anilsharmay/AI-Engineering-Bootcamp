@@ -39,7 +39,10 @@ Run the repository and complete the following:
 Compare the `agent` and `agent_helpful` assistants defined in `langgraph.json`. Where does the helpfulness evaluator fit in the graph, and under what condition should execution route back to the agent vs. terminate?
 
 ##### ✅ Answer:
-_(enter answer here)_
+- The `simple_agent` is a simple agent-tool graph that answers a user query
+- The `agent_with_helpfulness` has an extra conditional node that checks if the response generated is helpful for the user query or not, essenctially working as an LLM judde. 
+    - If not helpful, the agent node is executed again.
+    - The loop is executed until a helpful answer is generated OR the max message limit of 10 is reached.
 
 #### 🏗️ Activity #1 Debugging A Graph
 
@@ -50,8 +53,8 @@ Select the `agent_with_helpfulness` and set one or more interrupts (at least one
 What are your thoughts on when you would use a Before interrupt vs. an After interrupt?
 
 ##### ✅ Answer:
-_(enter answer here)_
-
+- A Before interrupt would be useful to inspect the inputs to a node, confirming all values are being passed accurately
+- An After interrupt would be useful to inspect the immediate output of the node to confirm it is working as expected
 
 
 <details>
