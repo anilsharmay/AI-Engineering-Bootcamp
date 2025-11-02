@@ -80,7 +80,11 @@ def create_guardrails_guard(
         
         # Jailbreak detection
         if enable_jailbreak_detection:
-            guard = guard.use(DetectJailbreak())
+            guard = guard.use(
+                DetectJailbreak(
+                    on_fail="exception"  # Raise exception when jailbreak detected
+                )
+            )
             logger.debug("Jailbreak detection guard configured")
         
         # PII protection
@@ -90,7 +94,7 @@ def create_guardrails_guard(
             guard = guard.use(
                 GuardrailsPII(
                     entities=entities,
-                    on_fail="fix"
+                    on_fail="exception"  # Block requests containing PII
                 )
             )
             logger.debug(f"PII protection guard configured for entities: {entities}")
@@ -194,13 +198,14 @@ def validate_input(
     except RuntimeError:
         raise
     except Exception as e:
-        logger.error(f"Input validation error: {e}", exc_info=True)
+        error_str = str(e)
+        logger.error(f"Input validation error: {error_str}", exc_info=True)
         if raise_on_failure:
-            raise RuntimeError(f"Input validation failed: {e}") from e
+            raise RuntimeError(f"Input validation failed: {error_str}") from e
         return {
             "validation_passed": False,
             "validated_output": user_input,
-            "error": str(e)
+            "error": error_str
         }
 
 

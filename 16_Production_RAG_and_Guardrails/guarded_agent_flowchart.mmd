@@ -1,0 +1,27 @@
+graph TD
+    Start([User Input]) --> InputValidation[Input Validation]
+    InputValidation -->|Pass| Agent[Agent Node]
+    InputValidation -->|Block| End1([END - Input Blocked])
+    
+    Agent --> Decision{Has Tool Calls?}
+    Decision -->|Yes| Action[Tool Execution]
+    Decision -->|No| OutputValidation[Output Validation]
+    
+    Action --> ToolValidation[Tool Output Validation]
+    ToolValidation -->|Pass| Agent
+    ToolValidation -->|Block| Warning[Warning Message]
+    Warning --> Agent
+    
+    OutputValidation -->|Pass| End2([END - Response])
+    OutputValidation -->|Fail| RefineDecision{Max Attempts?}
+    RefineDecision -->|No| Refinement[Refinement Node]
+    RefineDecision -->|Yes| End3([END - Max Refinements])
+    
+    Refinement --> Agent
+    
+    style InputValidation fill:#ff9999
+    style ToolValidation fill:#ffcc99
+    style OutputValidation fill:#ff9999
+    style Agent fill:#99ccff
+    style Action fill:#99ff99
+    style Refinement fill:#ffff99
