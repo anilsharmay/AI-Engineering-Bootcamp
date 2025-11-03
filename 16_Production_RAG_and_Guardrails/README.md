@@ -7,9 +7,9 @@
 
 ### [Quicklinks](https://github.com/AI-Maker-Space/AIE7/00_AIM_Quicklinks)
 
-| 🤓 Pre-work | 📰 Session Sheet | ⏺️ Recording     | 🖼️ Slides        | 👨‍💻 Repo         | 📝 Homework      | 📁 Feedback       |
-|:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|
-
+| 📰 Session Sheet | ⏺️ Recording     | 🖼️ Slides        | 👨‍💻 Repo         | 📝 Homework      | 📁 Feedback       |
+|:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|
+| [Session 16: Guardrails and Caching](https://www.notion.so/Session-16-Guardrails-and-Caching-26acd547af3d80edb45ccbf581b56545) |[Recording!](https://drive.google.com/file/d/19PjMMQ70OSd51rPYvoimXts-iYWP4dCa/view) | [Session 16 Slides](https://www.canva.com/design/DAG3TF7O5d0/6RvgqRTVCXemgplcwLTePQ/edit?utm_content=DAG3TF7O5d0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) | You are here! | [Session 16 Assignment: Caching + Guardrails](https://forms.gle/PuVoD1uUgFGLhNeV9) | [AIE8 Feedback 10/30](https://forms.gle/9EiZMygDPPX858mo7)
 
 # Build 🏗️
 
