@@ -89,7 +89,25 @@ What are the core components of an `AgentCard`?
 
 ##### ✅ Answer:
 
-<br />
+The core components of an `AgentCard` are:
+
+1. **`name`** - The display name of the agent (e.g., "General Purpose Agent")
+2. **`description`** - A human-readable description of what the agent does and its capabilities
+3. **`url`** - The base URL where the agent service is accessible (e.g., `http://localhost:10000/`)
+4. **`version`** - The version string of the agent (e.g., "1.0.0")
+5. **`default_input_modes`** - The content types/formats the agent accepts as input (typically from `Agent.SUPPORTED_CONTENT_TYPES`)
+6. **`default_output_modes`** - The content types/formats the agent can produce as output (typically from `Agent.SUPPORTED_CONTENT_TYPES`)
+7. **`capabilities`** - An `AgentCapabilities` object that specifies features like:
+   - `streaming` - Whether the agent supports streaming responses
+   - `push_notifications` - Whether the agent supports push notifications
+8. **`skills`** - A list of `AgentSkill` objects, where each skill defines:
+   - `id` - Unique identifier for the skill
+   - `name` - Display name of the skill
+   - `description` - What the skill does
+   - `tags` - Keywords for categorization
+   - `examples` - Example queries or use cases
+
+The `AgentCard` serves as a self-describing interface card that allows other agents to discover and interact with the agent through the A2A (Agent-to-Agent) protocol.
 
 ### ❓ Question #2:
 
@@ -97,7 +115,21 @@ Why is A2A (and other such protocols) important in your own words?
 
 ##### ✅ Answer:
 
-<br /><br />
+A2A (Agent-to-Agent) and similar protocols are crucial for several key reasons:
+
+**1. Standardization & Interoperability**: A2A provides a common language for AI agents to communicate. Aagents built with different frameworks (LangGraph, LangChain, custom implementations) can seamlessly interact without requiring custom integrations for each pairing.
+
+**2. Agent Discovery & Composition**: The protocol enables agents to discover each other's capabilities through self-describing AgentCards. This allows for dynamic composition of agent networks where specialized agents (e.g., a web search agent, a document analysis agent) can be discovered and leveraged by other agents when needed, creating a modular ecosystem.
+
+**3. Quality Assurance**: A2A includes built-in mechanisms like helpfulness evaluation, ensuring agents can assess response quality before delivering results. This creates a feedback loop that helps maintain high standards across agent interactions.
+
+**4. Scalability & Modularity**: Instead of building monolithic agents that try to do everything, A2A enables the creation of specialized, focused agents. When a complex task requires multiple capabilities, agents can delegate subtasks to specialized peers, resulting in more maintainable and efficient systems.
+
+**5. Future-Proofing**: As the AI agent ecosystem grows, standardized protocols prevent fragmentation. They enable an "agent marketplace" where agents can be developed independently but work together seamlessly, similar to how microservices transformed software architecture.
+
+**6. Transparency**: By requiring agents to declare their capabilities, input/output modes, and skills upfront, the protocol promotes transparency and reduces integration surprises. This self-documentation aspect is critical for trust and reliability in autonomous systems.
+
+In short, A2A is like "HTTP for agents" - it's the infrastructure layer that enables the distributed AI agent ecosystem to flourish.
 
 <details>
 <summary>🚧 Advanced Build 🚧 (OPTIONAL - <i>open this section for the requirements</i>)</summary>
