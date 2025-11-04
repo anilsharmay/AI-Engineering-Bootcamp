@@ -28,13 +28,13 @@ graph TD
 
 ```mermaid
 graph LR
-    CLIENT[Client Agent] -->|1. GET| WELLKNOWN["/.well-known/agent-card"]
-    WELLKNOWN -->|2. AgentCard JSON| CLIENT
-    CLIENT -->|3. Initialize| A2ACLIENT["A2AClient<br/>with AgentCard"]
+    CLIENT[Client Agent] -->|1. GET| SERVER["Server<br/>/.well-known/agent-card"]
+    SERVER -->|2. AgentCard JSON| CLIENT
+    CLIENT -->|3. Initialize| A2ACLIENT["Client-Side<br/>A2AClient Object"]
     A2ACLIENT -->|4. Ready to send| MESSAGES[messages]
 
     style CLIENT fill:#4a148c,stroke:#ffffff,stroke-width:2px,color:#ffffff
-    style WELLKNOWN fill:#2e7d32,stroke:#ffffff,stroke-width:2px,color:#ffffff
+    style SERVER fill:#2e7d32,stroke:#ffffff,stroke-width:2px,color:#ffffff
     style A2ACLIENT fill:#1b5e20,stroke:#ffffff,stroke-width:2px,color:#ffffff
     style MESSAGES fill:#283593,stroke:#ffffff,stroke-width:2px,color:#ffffff
 ```
