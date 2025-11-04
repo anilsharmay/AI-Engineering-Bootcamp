@@ -28,9 +28,9 @@ graph TD
 
 ```mermaid
 graph LR
-    CLIENT[Client Agent] -->|1. GET| WELLKNOWN[/.well-known/agent-card]
+    CLIENT[Client Agent] -->|1. GET| WELLKNOWN["/.well-known/agent-card"]
     WELLKNOWN -->|2. AgentCard JSON| CLIENT
-    CLIENT -->|3. Initialize| A2ACLIENT[A2AClient<br/>with AgentCard]
+    CLIENT -->|3. Initialize| A2ACLIENT["A2AClient<br/>with AgentCard"]
     A2ACLIENT -->|4. Ready to send| MESSAGES[messages]
 
     style CLIENT fill:#4a148c,stroke:#ffffff,stroke-width:2px,color:#ffffff
