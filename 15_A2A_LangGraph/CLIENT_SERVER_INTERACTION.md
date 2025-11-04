@@ -2,41 +2,27 @@
 
 This document contains Mermaid diagrams visualizing the interactions between the client agent and server agent using the A2A protocol.
 
-## Server Agent LangGraph Flow (Reference)
-
-```mermaid
-graph TD
-    START([User Query]) --> AGENT[agent node<br/>LLM + Tools]
-    AGENT --> ROUTE{Has tool calls?}
-    ROUTE -->|Yes| ACTION[action node<br/>Execute tools]
-    ROUTE -->|No| HELPFUL[helpfulness node<br/>Evaluate response]
-    ACTION --> AGENT
-    HELPFUL --> DECISION{Helpful?}
-    DECISION -->|Yes Y| END([END])
-    DECISION -->|No N| LOOP{< 10 iterations?}
-    LOOP -->|Yes| AGENT
-    LOOP -->|No| END
-
-    style START fill:#1e3a5f,stroke:#ffffff,stroke-width:3px,color:#ffffff
-    style AGENT fill:#4a148c,stroke:#ffffff,stroke-width:2px,color:#ffffff
-    style ACTION fill:#1b5e20,stroke:#ffffff,stroke-width:2px,color:#ffffff
-    style HELPFUL fill:#e65100,stroke:#ffffff,stroke-width:2px,color:#ffffff
-    style END fill:#c62828,stroke:#ffffff,stroke-width:3px,color:#ffffff
-```
-
 ## A2A Protocol Discovery Flow
 
 ```mermaid
-graph LR
-    CLIENT[Client Agent] -->|1. GET| SERVER["Server<br/>/.well-known/agent-card"]
-    SERVER -->|2. AgentCard JSON| CLIENT
-    CLIENT -->|3. Initialize| A2ACLIENT["Client-Side<br/>A2AClient Object"]
-    A2ACLIENT -->|4. Ready to send| MESSAGES[messages]
-
-    style CLIENT fill:#4a148c,stroke:#ffffff,stroke-width:2px,color:#ffffff
-    style SERVER fill:#2e7d32,stroke:#ffffff,stroke-width:2px,color:#ffffff
-    style A2ACLIENT fill:#1b5e20,stroke:#ffffff,stroke-width:2px,color:#ffffff
-    style MESSAGES fill:#283593,stroke:#ffffff,stroke-width:2px,color:#ffffff
+sequenceDiagram
+    participant ClientApp as Client Agent<br/>(Application Code)
+    participant Resolver as A2ACardResolver<br/>(Client-Side Library)
+    participant Server as A2A Server<br/>(/.well-known/agent-card)
+    participant ClientLib as A2AClient<br/>(Client-Side Library)
+    
+    Note over ClientApp,ClientLib: Discovery Phase
+    
+    ClientApp->>Resolver: Create resolver with base_url
+    ClientApp->>Resolver: resolver.get_agent_card()
+    Resolver->>Server: GET /.well-known/agent-card
+    Server-->>Resolver: AgentCard JSON<br/>(name, skills, capabilities, endpoints)
+    Resolver-->>ClientApp: Return AgentCard
+    
+    Note over ClientApp,ClientLib: Initialization Phase
+    
+    ClientApp->>ClientLib: Initialize A2AClient(agent_card)
+    Note over ClientApp,ClientLib: Client now knows:<br/>- What server can do (skills)<br/>- How to format requests<br/>- API endpoints<br/>- Ready to send queries
 ```
 
 ## Multi-Turn Conversation Flow
@@ -66,7 +52,7 @@ sequenceDiagram
     Note over Client: Server remembers previous conversation
 ```
 
-## Tool Execution Flow (Server Side)
+## Execution Flow (Server Side)
 
 ```mermaid
 graph TD
@@ -126,7 +112,7 @@ graph TB
     style PROTOCOL fill:#e65100,stroke:#ffffff,stroke-width:2px,color:#ffffff
 ```
 
-## Current Client Agent Implementation (Simplified)
+## Current Client Agent Implementation
 
 ### Client Agent Graph Flow
 
@@ -179,56 +165,6 @@ classDiagram
 
     ClientAgentState --> AgentCard
     ClientAgentState --> A2AClient
-```
-
-### Main Function Flow
-
-```mermaid
-graph TD
-    MAIN[main function] --> DISCOVER[Discover Agent<br/>discover_agent helper]
-    DISCOVER --> BUILD[Build Graph<br/>build_client_agent_graph]
-    BUILD --> LOOP[Interactive Loop]
-    LOOP --> INPUT[User Input Query]
-    INPUT --> CHECK{quit?}
-    CHECK -->|Yes| CLEANUP[Close httpx_client]
-    CHECK -->|No| INVOKE[Invoke Graph<br/>with initial state]
-    INVOKE --> COMPLETE[Research Complete]
-    COMPLETE --> LOOP
-    CLEANUP --> EXIT([Exit])
-
-    style MAIN fill:#1e3a5f,stroke:#ffffff,stroke-width:3px,color:#ffffff
-    style DISCOVER fill:#4a148c,stroke:#ffffff,stroke-width:2px,color:#ffffff
-    style BUILD fill:#1b5e20,stroke:#ffffff,stroke-width:2px,color:#ffffff
-    style LOOP fill:#e65100,stroke:#ffffff,stroke-width:2px,color:#ffffff
-    style INVOKE fill:#2e7d32,stroke:#ffffff,stroke-width:2px,color:#ffffff
-    style EXIT fill:#c62828,stroke:#ffffff,stroke-width:3px,color:#ffffff
-```
-
-### Response Extraction Flow
-
-```mermaid
-graph TD
-    RESPONSE[A2A Response Object] --> DUMP[model_dump to dict]
-    DUMP --> CHECK_ERROR{Has error?}
-    CHECK_ERROR -->|Yes| ERROR[Return Error]
-    CHECK_ERROR -->|No| GET_RESULT[Get result from response]
-    GET_RESULT --> EXTRACT[Extract task_id, contextId]
-    GET_RESULT --> CHECK_ARTIFACTS{Has artifacts?}
-    CHECK_ARTIFACTS -->|Yes| ARTIFACT[Extract from artifact.parts]
-    CHECK_ARTIFACTS -->|No| CHECK_MESSAGES{Has messages?}
-    CHECK_MESSAGES -->|Yes| MESSAGES[Extract from messages]
-    CHECK_MESSAGES -->|No| CHECK_CONTENT{Has content?}
-    CHECK_CONTENT -->|Yes| CONTENT[Use content field]
-    CHECK_CONTENT -->|No| FALLBACK[JSON dump result]
-    ARTIFACT --> RETURN[Return task_id, context_id, text]
-    MESSAGES --> RETURN
-    CONTENT --> RETURN
-    FALLBACK --> RETURN
-
-    style RESPONSE fill:#1e3a5f,stroke:#ffffff,stroke-width:2px,color:#ffffff
-    style ARTIFACT fill:#1b5e20,stroke:#ffffff,stroke-width:2px,color:#ffffff
-    style MESSAGES fill:#4a148c,stroke:#ffffff,stroke-width:2px,color:#ffffff
-    style RETURN fill:#2e7d32,stroke:#ffffff,stroke-width:2px,color:#ffffff
 ```
 
 ### User-Driven Refinement Loop
