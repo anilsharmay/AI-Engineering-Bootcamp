@@ -52,7 +52,7 @@ sequenceDiagram
     Note over Client: Server remembers previous conversation
 ```
 
-## Execution Flow (Server Side)
+## Server Side Agent - Execution Flow
 
 ```mermaid
 graph TD
