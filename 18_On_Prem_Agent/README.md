@@ -7,8 +7,9 @@
 
 ### [Quicklinks](https://github.com/AI-Maker-Space/AIE7/00_AIM_Quicklinks)
 
-| 🤓 Pre-work | 📰 Session Sheet | ⏺️ Recording     | 🖼️ Slides        | 👨‍💻 Repo         | 📝 Homework      | 📁 Feedback       |
-|:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|
+| 📰 Session Sheet | ⏺️ Recording     | 🖼️ Slides        | 👨‍💻 Repo         | 📝 Homework      | 📁 Feedback       |
+|:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|
+| [Session 18: On-Prem Agents](https://www.notion.so/Session-18-On-Prem-Agents-26acd547af3d80949015d342f15f29c0) |[Recording!](https://us02web.zoom.us/rec/share/BzZQu6kpi0p9xTIEpfpw5A4wbTiNnqTSStTM7-AdB0lsIaeYym7wEHKdYih4uGle.KUoK_CWJRZqZ_UiS ) (TN0^r1EE) | [Session 18 Slides](https://www.canva.com/design/DAGwvRulA7w/9cwBNDmZew_4T02Ygc17FA/edit?utm_content=DAGwvRulA7w&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) | You are here! | [Session 28 Assignment: Onprem](https://forms.gle/KgRUSEutSBYL9bxa7) | [AIE8 Feedback 11/6](https://forms.gle/rkjRUstYto2VyTmB8)
 
 # Build 🏗️
 
