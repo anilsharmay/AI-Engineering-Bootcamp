@@ -9,7 +9,7 @@
 
 | 🤓 Pre-work | 📰 Session Sheet | ⏺️ Recording     | 🖼️ Slides        | 👨‍💻 Repo         | 📝 Homework      | 📁 Feedback       |
 |:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|
-| [Session 18: Pre-Work](https://www.notion.so/Session-18-On-Prem-Agents-21dcd547af3d8051b1e7c8c4b0e21b6c?source=copy_link#255cd547af3d8079be9cd62383953fdd)| [Session 18: On-Prem Agents](https://www.notion.so/Session-18-On-Prem-Agents-21dcd547af3d8051b1e7c8c4b0e21b6c) | [Recording!](https://us02web.zoom.us/rec/share/zyfiKsJQWIa2EKakqVpRlkSLXd8aGbrH2t1IiLDNJFTuGNfhnxXTXELEJSKJS3q4.uQ8K1rWej8B0LB9g) (QznJk?9P) | [Session 18 Slides](https://www.canva.com/design/DAGwvRulA7w/9cwBNDmZew_4T02Ygc17FA/edit?utm_content=DAGwvRulA7w&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) | You are here! | [Session 18 assignment: On-prem](https://forms.gle/THVU94VLHeRG1B4e8)| [AIE7 Feedback 8/21](https://forms.gle/GX3TMLYWiNxUiszc9)
+
 # Build 🏗️
 
 First, let's pull and run our DeepSeek-R1 distilled model through Ollama.
