@@ -1,0 +1,17 @@
+[project]
+name = "17-on-prem-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "jupyter>=1.1.1",
+    "langchain-qdrant>=0.2.0",
+    "langchain>=0.3.20",
+    "langchain-ollama>=0.2.3",
+    "ollama>=0.4.7",
+    "langchain-community>=0.3.19",
+    "numpy>=2.2.3",
+    "unstructured>=0.14.8",
+    "jq>=1.8.0",
+]
