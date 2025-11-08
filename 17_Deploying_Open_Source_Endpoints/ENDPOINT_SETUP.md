@@ -40,4 +40,20 @@ What is the difference between serverless and dedicated endpoints?
 
 #### ✅ Answer:
 
-_(insert your answer here)_
+**Serverless Endpoints:**
+- Managed automatically by the service provider (e.g., Together AI)
+- Scale up and down automatically based on demand
+- Pay-per-use pricing model (you only pay when making requests)
+- May experience cold starts (initial latency when first invoked after inactivity)
+- No need to manage infrastructure or provisioning
+- Best for sporadic or unpredictable workloads
+- Example: The `openai/gpt-oss-20b` serverless endpoint mentioned at the top of this document
+
+**Dedicated Endpoints:**
+- Provisioned specifically for your use case and always running (unless you shut them down)
+- Consistent performance and lower latency (no cold starts)
+- Reserved capacity ensures availability
+- Pay for compute time regardless of usage (costs continue even when idle)
+- Require manual management (setting auto-shutdown timers, monitoring, etc.)
+- Best for production workloads with consistent demand or when you need guaranteed availability
+- Example: The dedicated endpoint you create in the steps above
